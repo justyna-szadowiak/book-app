@@ -1,9 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import "./SearchBar.css";
+import request from 'superagent';
 
 function SearchBar({ placeholder, data }) {
     const [filteredData, setFilteredData] = useState([]);
     const [wordEnetered, setWordEntered] = useState("");
+
+    searchBook = (event) => {
+      event.preventDefault();
+        request
+          .get("https://www.googleapis.com/books/v1/volumes")
+          .query({ q: this.searchWord })
+          .then((data) => {
+              console.log(data);
+          });
+    };
 
     const handleFilter = (event) => {
         const searchWord = event.target.value;
@@ -19,16 +30,22 @@ function SearchBar({ placeholder, data }) {
           }
         };
 
+        const clearInput = () => {
+          setFilteredData([]);
+        };
+
         return (
           <div>
             <div className="searchInputs">
-              <input
-                className="search"
-                type="text"
-                placeholder={placeholder}
-                value={wordEnetered}
-                onChange={handleFilter}
-              />
+              <form onSubmit={props.searchBook} action="">
+                <input
+                  className="search"
+                  type="text"
+                  placeholder={placeholder}
+                  value={wordEnetered}
+                  onChange={handleFilter}
+                />
+              </form>
               {filteredData.length === 0 ? (
                 <i class="search icon" id="iIcon"></i>
               ) : (
@@ -39,7 +56,6 @@ function SearchBar({ placeholder, data }) {
               <div className="dataResult">
                 {filteredData.slice(0, 5).map((value, key) => {
                   return (
-                    // eslint-disable-next-line react/jsx-no-target-blank
                     <a className="dataItem" href={value.link} target="_blank">
                       <p>{value.title}</p>
                     </a>
