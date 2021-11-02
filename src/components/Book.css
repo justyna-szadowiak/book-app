@@ -1,0 +1,33 @@
+.bookPlaceholder {
+    display: inline-flex;
+    box-sizing: border-box;
+    width: 350px;
+    margin-right: 10px;
+}
+
+.bookTitle {
+    grid-column: 1;
+    grid-row: 1;
+    font-size: 20px;
+    margin-bottom: 5px;
+    padding-top: 20px;
+}
+
+.bookAuthor {
+    grid-column: 1;
+    grid-row: 2;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.bookCover {
+    grid-column: 1;
+    grid-row: 3;
+}
+
+.bookDescription {
+    grid-column: 2;
+    grid-row: 4;
+    font-size: 16px;
+    text-align: justify;
+}

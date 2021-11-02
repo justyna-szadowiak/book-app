@@ -24,6 +24,12 @@
 
 #iIcon {
     position: absolute;
-    right: 10px;
-    top: 15px;
+    right: 20px;
+    top: 2px;
+}
+
+#clearButton {
+    position: absolute;
+    right: 20px;
+    top: 2px;
 }

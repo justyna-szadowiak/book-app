@@ -1,13 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { api } from "./api";
 import "./SearchBar.css";
+import Book from "./Book";
 
-function SearchBar({ placeholder, data }) {
-  const [filteredData, setFilteredData] = useState([]);
+function SearchBar({ placeholder }) {
+  const [filteredBooks, setFilteredBooks] = useState([]);
+  const [searchPhrase, setSearchPhrase] = useState("");
 
   const search = async (event) => {
-    const books = await api.searchBook(event.target.value);
-    setFilteredData(books.items);
+    const currentSearchPhrase = event.target.value;
+    setSearchPhrase(currentSearchPhrase);
+    if (currentSearchPhrase) {
+      const books = await api.searchBook(currentSearchPhrase);
+      setFilteredBooks(books.items);
+    }
   };
 
   useEffect(() => {
@@ -18,48 +24,46 @@ function SearchBar({ placeholder, data }) {
   }, []);
 
   const clearInput = () => {
-    setFilteredData([]);
+    setFilteredBooks([]);
+    setSearchPhrase("");
   };
+
+  const bookList = filteredBooks.slice(0, 12).map((book) => {
+    if (filteredBooks.length !== 0) {
+      return (
+        <Book
+          title={book.volumeInfo.title}
+          authors={book.volumeInfo.authors}
+          thumbnailUrl={book.volumeInfo.imageLinks?.thumbnail}
+          description={book.volumeInfo.description}
+        />
+      );
+    }
+  });
 
   return (
     <div>
       <div className="searchInputs">
         <form>
           <input
+            placeholder="Search"
             className="search"
             type="text"
-            placeholder={placeholder}
+            value={searchPhrase}
             onChange={search}
           />
+          {filteredBooks.length === 0 ? (
+            <i className="search icon" id="iIcon"></i>
+          ) : (
+            <i
+              className="close link icon"
+              id="clearButton"
+              onClick={clearInput}
+            ></i>
+          )}
         </form>
-        {filteredData.length === 0 ? (
-          <i className="search icon" id="iIcon"></i>
-        ) : (
-          <i
-            className="close link icon"
-            id="clearButton"
-            onClick={clearInput}
-          ></i>
-        )}
       </div>
-
-      {filteredData.length !== 0 && (
-        <div className="dataResult">
-          {filteredData.slice(0, 5).map((value, key) => {
-            return (
-              <div className="bookPlaceholder">
-                <h4>{value.volumeInfo.title}</h4>
-                <h5>{value.volumeInfo.authors}</h5>
-                <img
-                  src={value.volumeInfo.imageLinks.thumbnail}
-                  alt="images"
-                ></img>
-                <p>{value.volumeInfo.description}</p>
-              </div>
-            );
-          })}
-        </div>
-      )}
+      {bookList}
     </div>
   );
 }

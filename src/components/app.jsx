@@ -5,10 +5,10 @@ class App extends React.Component {
     render() {
         return (
             <div className="app">
-                <SearchBar searchBook={this.searchBook} placeholder="Enter a Book title ..." />
+                <SearchBar placeholder="Enter a Book title ..." />
             </div>
         );
-    }
+    };
 }
 
 export default App;
