@@ -1,5 +1,6 @@
 import React from "react";
 import SearchBar from "./SearchBar";
+import "./App.css";
 
 class App extends React.Component {
     render() {
@@ -8,7 +9,7 @@ class App extends React.Component {
                 <SearchBar placeholder="Enter a Book title ..." />
             </div>
         );
-    };
+    } 
 }
 
 export default App;

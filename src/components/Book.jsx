@@ -18,9 +18,6 @@ function Book({title, authors, thumbnailUrl, description, category}) {
             description={description}
             />
           </div>
-          <div>
-            <p className="bookCategory">{category}</p>
-          </div>
         </div>
     );
 };
