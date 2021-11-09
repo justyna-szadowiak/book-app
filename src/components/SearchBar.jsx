@@ -46,7 +46,7 @@ function SearchBar({ placeholder }) {
       <div className="searchInputs">
         <form>
           <input
-            placeholder="Search"
+            placeholder={placeholder}
             className="search"
             type="text"
             value={searchPhrase}
