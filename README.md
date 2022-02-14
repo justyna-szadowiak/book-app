@@ -1,4 +1,10 @@
-# Getting Started with Create React App
+## About the app
+
+This project was created for searching the books using api (https://www.googleapis.com/books/).
+
+Follow the below istruction and enjoy the app!
+
+##
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
