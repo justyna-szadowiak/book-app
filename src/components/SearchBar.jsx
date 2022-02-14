@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { api } from "./api";
 import "./SearchBar.css";
+import "./App.css";
 import Book from "./Book";
 
 function SearchBar({ placeholder }) {
@@ -43,8 +44,8 @@ function SearchBar({ placeholder }) {
 
   return (
     <div>
-      <div className="searchInputs">
-        <form>
+      <div>
+        <form className="searchInputs">
           <input
             placeholder={placeholder}
             className="search"
